@@ -1,0 +1,45 @@
+package ICU_auto;
+
+import org.testng.annotations.Test;
+
+import org.testng.annotations.BeforeClass;
+import org.testng.annotations.Listeners;
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.WebElement;
+import org.testng.annotations.BeforeTest;
+import atu.testng.reports.ATUReports;
+import org.testng.annotations.BeforeTest;
+import atu.testng.reports.listeners.ConfigurationListener;
+import atu.testng.reports.listeners.ATUReportsListener;
+import atu.testng.reports.listeners.MethodListener;
+import atu.testng.reports.logging.LogAs; 
+
+
+@Listeners ({ATUReportsListener.class, ConfigurationListener.class, MethodListener.class})
+public class icu_auto {
+	{
+	System.setProperty("webdriver.chrome.driver", "C:\\Users\\Yaron\\Desktop\\chromedriver\\chromedriver.exe");
+	}
+	static WebDriver wdDriver;
+	
+	
+	@BeforeTest
+	public static void browser () {
+		wdDriver = new ChromeDriver();
+		final String path = "http://root.204.projects.linnovate.net/";
+		wdDriver.navigate().to(path);
+		wdDriver.manage().window().maximize();
+	}
+	@Test
+	public static void Tasks () throws InterruptedException {
+		wdDriver.findElement(By.xpath("/html/body/section/section/div/form/div[2]/input")).sendKeys("qa2@gmail.com");
+		wdDriver.findElement(By.xpath("/html/body/section/section/div/form/div[3]/input")).sendKeys("12121212");
+		Thread.sleep(500);
+		wdDriver.findElement(By.className("btn")).click();
+		Thread.sleep(1000);
+		wdDriver.findElement(By.className("btn")).click();
+		Thread.sleep(2000);
+	}
+}
